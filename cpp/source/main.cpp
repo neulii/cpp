@@ -23,7 +23,7 @@ int main() {
 
 
 	}
-
+	//ein kleiner test
 	map->showMap();
 
 	Point a = Point(3, 3);
