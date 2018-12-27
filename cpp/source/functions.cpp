@@ -1,8 +1,15 @@
-#include <cstdlib>
-#include <ostream>
-#include "Point.h"
+
+
+#include "functions.h"
+
 
 using namespace std;
+
+sf::Color getRandomColor() {
+
+	return sf::Color(getRandomInt(255), getRandomInt(255), getRandomInt(255));
+}
+
 //=====================================================================================
 
 /*

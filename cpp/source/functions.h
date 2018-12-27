@@ -1,7 +1,16 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
+#include <cstdlib>
+#include <ostream>
+#include <SFML/Graphics.hpp>
 #include <ctime>
+#include "Point.h"
+
+
+sf::Color getRandomColor();
+
+
 
 
 //=====================================================================================
