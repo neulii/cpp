@@ -1,45 +1,24 @@
-#include "functions.h"
-#include <iostream>
-#include <conio.h>
-#include "Point.h"
-#include <vector>
-#include "map.h"
+#include <SFML/Graphics.hpp>
 
-using namespace std;
+int main()
+{
+	sf::RenderWindow window(sf::VideoMode(500, 500), "SFML works!");
+	sf::CircleShape shape(50.f);
+	shape.setFillColor(sf::Color::Green);
 
-int main() {
-	
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
 
-
-	srand(time(NULL));
-
-	Map *map = new Map(100, 20);
-
-	for (int i = 0; i < 100; i++) {
-
-		Point *temp = Point::getRandomPoint(0,100,0,20);
-		//temp->showPoint();
-		map->setPoint(*temp);
-
-
+		window.clear();
+		window.draw(shape);
+		window.display();
 	}
-	//ein kleiner test
-	map->showMap();
-
-	Point a = Point(3, 3);
-	Point b = Point(2, 4);
-
-	Point c = a + b;
-	c.showPoint();
-	++c;
-	c.showPoint();
-
-
-
-
-
-	_getch();
-
 
 	return 0;
 }
