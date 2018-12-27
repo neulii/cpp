@@ -1,20 +1,34 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "functions.h"
+#include <math.h>
 
-
+using namespace std;
 
 int main()
 {
-	float speed = 0.1;
+	
+	double speedBall = 0;
+	float  acc = 0;
+	double speed = 0.1;
 	srand(time(NULL));
-
-
+	sf::Clock clock;
+	bool start = false;
+	
+	
 
 	sf::RenderWindow window(sf::VideoMode(800, 800), "my visual game");
 
 	sf::CircleShape shape(50.f);
 	sf::RectangleShape rs(sf::Vector2f(100, 100));
+	
+	sf::CircleShape ball(20);
+
+	ball.setFillColor(sf::Color::Red);
+	ball.setPosition(50, 0);
+
+
+	
 	rs.setFillColor(getRandomColor());
 	rs.setOutlineColor(sf::Color::White);
 	rs.setOutlineThickness(2);
@@ -42,110 +56,67 @@ int main()
 
 			if (event.type == sf::Event::KeyPressed) {
 
-				std::cout << event.key.code  ;
-
-				if (event.key.code == sf::Keyboard::Left) {
-					left = true;
-				}
-
-				if (event.key.code == sf::Keyboard::Right) {
-					right = true;
-				}
-
-				if (event.key.code == sf::Keyboard::Up) {
-					up = true;
-				}
-
-				if (event.key.code == sf::Keyboard::Down) {
-					down = true;
-				}
-
 				if (event.key.code == sf::Keyboard::Space) {
-					rs.setFillColor(getRandomColor());
-					rs.setOutlineColor(getRandomColor());
-				}
-
-				if (event.key.code == sf::Keyboard::A) {
-					speed += 0.05;
-				}
-
-				if (event.key.code == sf::Keyboard::Y) {
-					if(speed-0.05>0)
-					speed -= 0.05;
+				
+					
+					
+					clock.restart();
+					start = true;
+				
 				}
 
 				if (event.key.code == sf::Keyboard::Enter) {
 
-					rs.setPosition(sf::Vector2f(0, 0));
+
+
+					ball.setPosition(50, 0);
+
+
 				}
+			}
+	
+		
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+			rs.move(-speed, 0);
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+			rs.move(speed, 0);
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+			rs.move(0, -speed);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+			rs.move(0,speed);
+		}
+
+		long time = clock.getElapsedTime().asMilliseconds();
+
+		speedBall = 9.81*time/1000;
+		
+		if (start) {
+
+			
+			if(ball.getPosition().y<window.getSize().y-50){
+				cout << speedBall << endl;
+				ball.move(0, speedBall);
 
 
 			}
-
-			if (event.type == sf::Event::KeyReleased) {
-				if (event.key.code == sf::Keyboard::Left) {
-					left = false;
-				}
-
-			}
-
-			if (event.type == sf::Event::KeyReleased) {
-				if (event.key.code == sf::Keyboard::Right) {
-					right = false;
-				}
-
-			}
-
-			if (event.type == sf::Event::KeyReleased) {
-				if (event.key.code == sf::Keyboard::Up) {
-					up = false;
-				}
-
-			}
-
-			if (event.type == sf::Event::KeyReleased) {
-				if (event.key.code == sf::Keyboard::Down) {
-					down = false;
-				}
-
+			else
+			{
+				start = false;
+				
 			}
 		}
-
-		if (left) {
-			sf::Vector2f v(rs.getPosition());
-			v.x = v.x - speed;
-
-			rs.setPosition(v);
-
-		}
-
-		if (right) {
-			sf::Vector2f v(rs.getPosition());
-			v.x = v.x + speed;
-
-			rs.setPosition(v);
-
-		}
-
-		if (up) {
-			sf::Vector2f v(rs.getPosition());
-			v.y = v.y - speed;
-
-			rs.setPosition(v);
-
-		}
-
-		if (down) {
-			sf::Vector2f v(rs.getPosition());
-			v.y = v.y + speed;
-
-			rs.setPosition(v);
-
-		}
-
+		
 		window.clear();
 		window.draw(shape);
 		window.draw(rs);
+		window.draw(ball);
 
 		window.display();
 	}
