@@ -26,6 +26,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\functions.h" />
+    <ClInclude Include="source\game.h" />
     <ClInclude Include="source\map.h" />
     <ClInclude Include="source\Point.h" />
   </ItemGroup>
