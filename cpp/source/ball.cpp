@@ -10,6 +10,7 @@ Ball::Ball(int x, int y, int size) {
 	circle.setRadius(this->size);
 
 
+
 }
 
 
