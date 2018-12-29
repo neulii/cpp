@@ -2,7 +2,7 @@
 
 Game::Game(){
 
-	window.create(sf::VideoMode(600, 600), "Balls");
+	window.create(sf::VideoMode(WIDTH, HEIGHT), "Balls");
 	window.setFramerateLimit(60);
 
 }

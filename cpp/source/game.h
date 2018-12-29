@@ -3,12 +3,17 @@
 
 #include <SFML/Graphics.hpp>
 
+
+
 class Game {
 
 private:
 	
-	sf::RenderWindow window;
+	const int HEIGHT = 400;
+	const int WIDTH = 600;
 	
+	sf::RenderWindow window;
+
 	void processEvents();
 	void update();
 	void render();
