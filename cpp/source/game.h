@@ -2,7 +2,7 @@
 #define GAME_H
 
 #include <SFML/Graphics.hpp>
-
+#include "ball.h"
 
 
 class Game {
@@ -17,6 +17,10 @@ private:
 	void processEvents();
 	void update();
 	void render();
+
+	Ball* ball;
+	
+	
 
 public:
 

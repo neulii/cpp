@@ -1,9 +1,18 @@
 #include "game.h"
+#include "ball.h"
 
 Game::Game(){
 
 	window.create(sf::VideoMode(WIDTH, HEIGHT), "Balls");
 	window.setFramerateLimit(60);
+
+	
+	ball = new Ball(20, 20, 20);
+
+	
+
+
+
 
 }
 
@@ -28,9 +37,11 @@ void Game::processEvents() {
 
 void Game::render() {
 	window.clear();
-
+	
 	//draw()
+	ball->render(window);
 
+	
 	window.display();
 }
 
