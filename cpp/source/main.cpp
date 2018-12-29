@@ -63,7 +63,7 @@ int main()
 					start = true;	
 				}
 
-				if (event.key.code == sf::Keyboard::Enter) {
+				if (event.key.code == sf::Keyboard::Return) {
 					ball.setPosition(50, 0);
 				}
 			}
