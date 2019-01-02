@@ -24,7 +24,7 @@ int main()
 	srand(time(NULL));
 
 	vector<Ball> balls;
-	int numberOfBalls = 10;
+	int numberOfBalls =4000;
 	int randomX = 0;
 
 	/*for (int i = 0; i < 10; i++) {
@@ -39,7 +39,7 @@ int main()
 		int range = window.getSize().y;
 
 		randomX = getRandomInt(range);
-		cout << randomX << endl;
+		//cout << randomX << endl;
 
 		
 
@@ -54,7 +54,7 @@ int main()
 
 	}
 	
-	cout << RAND_MAX;
+	
 
 	gameFont.loadFromFile("arial.ttf");
 	showFPS.setFont(gameFont);

@@ -7,6 +7,24 @@
 #include <ctime>
 #include "Point.h"
 
+//====================================================================================
+//bool isPointInside(sf::CircleShape circle, Point p) {
+//	bool isInside = false;
+//	
+//	double a = p.getX() - circle.getPosition().x;
+//	double b = circle.getPosition().y - p.getY();
+//
+//	double c = sqrt((a * a ) + (b * b));
+//
+//	if (c <= circle.getRadius()) {
+//		isInside = true;
+//	}
+//
+//	return isInside;
+//}
+
+//====================================================================================
+
 sf::Color getRandomColor();
 
 //=====================================================================================

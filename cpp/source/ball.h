@@ -13,6 +13,7 @@ private:
 
 	sf::Color color;
 	sf::CircleShape circle;
+	
 
 	bool right;
 	bool left;

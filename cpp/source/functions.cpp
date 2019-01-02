@@ -1,9 +1,14 @@
 
-
 #include "functions.h"
+#include "SFML/Graphics.hpp"
 
 
 using namespace std;
+//=======================================================================================
+
+//bool isPointInside(sf::CircleShape circle, Point p);
+
+//======================================================================================
 
 sf::Color getRandomColor() {
 

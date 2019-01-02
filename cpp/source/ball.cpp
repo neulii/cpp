@@ -16,6 +16,7 @@ Ball::Ball(int x, int y, int size) {
 	circle.setFillColor(sf::Color::Red);
 	circle.setPosition(sf::Vector2f(this->x, this->y));
 	circle.setRadius(this->size);
+
 }
 
 
@@ -27,7 +28,7 @@ void Ball::render(sf::RenderWindow &window)
 
 void Ball::update(sf::RenderWindow &window)
 {
-
+	
 	//std::cout << circle.getPosition().x <<  "   " << right << "   " << left <<  std::endl;
 
 	if (right) {
