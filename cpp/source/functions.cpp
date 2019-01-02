@@ -31,4 +31,12 @@ int getRandomInt(int start, int range) {
 
 }
 
+float getRandomFloat(float min, float max) {
+	return ((max - min) * ((float)rand() / RAND_MAX)) + min;
+}
+
+float getRandomFloat(float range) {
+	return getRandomFloat(0, range);
+}
+
 //=====================================================================================

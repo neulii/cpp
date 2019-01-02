@@ -7,11 +7,7 @@
 #include <ctime>
 #include "Point.h"
 
-
 sf::Color getRandomColor();
-
-
-
 
 //=====================================================================================
 
@@ -24,6 +20,10 @@ rand gehört noch mit srand initialisiert
 
 int getRandomInt(int range);
 int getRandomInt(int start, int range);
+
+float getRandomFloat(float min, float max);
+float getRandomFloat(float range);
+
 
 //=====================================================================================
 
