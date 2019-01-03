@@ -13,6 +13,7 @@
 
 bool isPointInside(sf::CircleShape circle, Point p);
 bool isPointInside(sf::CircleShape circle, sf::Vector2i p);
+bool isPointInside(sf::CircleShape circle, int x, int y);
 
 
 //====================================================================================

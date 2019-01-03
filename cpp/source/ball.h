@@ -28,6 +28,7 @@ public:
 	void setRandomSpeed(float min, float max);
 	void setSpeed(float speed);
 	float getSpeed();
+	bool isInside(sf::Vector2i p);
 
 	void render(sf::RenderWindow &window);
 	void update(sf::RenderWindow &window);

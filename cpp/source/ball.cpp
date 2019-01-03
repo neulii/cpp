@@ -7,8 +7,6 @@ Ball::Ball(int x, int y, int size) {
 	this->y = y;
 	this->size = size;
 
-	
-
 	speed = 0.1;
 	right = true;
 	left = false;
@@ -16,14 +14,12 @@ Ball::Ball(int x, int y, int size) {
 	circle.setFillColor(sf::Color::Red);
 	circle.setPosition(sf::Vector2f(this->x, this->y));
 	circle.setRadius(this->size);
-
 }
 
 
 void Ball::render(sf::RenderWindow &window)
 {
 	window.draw(circle);
-
 }
 
 void Ball::update(sf::RenderWindow &window)
@@ -65,18 +61,18 @@ float Ball::getSpeed() {
 }
 
 void Ball::setRandomColor() {
-
 	circle.setFillColor(getRandomColor());
 }
 
 void Ball::setRandomSpeed(float range) {
 	setSpeed(getRandomFloat(0, range));
-
-
-
 }
 
 void Ball::setRandomSpeed(float min, float max) {
 	setSpeed(getRandomFloat(min, max));
+}
+
+bool Ball::isInside(sf::Vector2i p) {
+	return isPointInside(circle, p);
 }
 

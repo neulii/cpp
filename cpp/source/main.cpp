@@ -10,10 +10,14 @@ int main()
 	const int WIDTH = 500;
 	const int HEIGHT = 500;
 
+	
+
 	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Balls");
 	sf::Clock clock;
 	sf::Font gameFont;
 	sf::Text showFPS;
+
+	window.setFramerateLimit(60);
 
 	sf::CircleShape test;
 	test.setPosition(100, 100);
@@ -24,13 +28,13 @@ int main()
 
 	sf::Vertex line[2];
 	
-	float fps = 0;
+	int fps = 0;
 	long elapsedTime = 0;
 
 	srand(time(NULL));
 
 	vector<Ball> balls;
-	int numberOfBalls =0;
+	int numberOfBalls =50;
 	int randomX = 0;
 
 	/*for (int i = 0; i < 10; i++) {
@@ -40,14 +44,14 @@ int main()
 
 	for (int i = 0; i < numberOfBalls; i++) {
 		
-		int range = window.getSize().y;
+		int range = window.getSize().y-20;
 
 		randomX = getRandomInt(range);
 		//cout << randomX << endl;
 
 		Ball *temp = new Ball(20, randomX, 20);
 		temp->setRandomColor();
-		temp->setRandomSpeed(0.2,1.5);
+		temp->setRandomSpeed(1,10);
 
 		balls.push_back(*temp);
 	}
@@ -87,8 +91,19 @@ int main()
 
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 				//cout << "clicked" << endl;
-				if (isPointInside(test, sf::Mouse::getPosition(window))) {
+				/*if (isPointInside(test, sf::Mouse::getPosition(window))) {
 					cout << "inside" << endl;
+					
+				}*/
+				for (int i = 0; i < balls.size(); i++) {
+					if (balls.at(i).isInside(sf::Mouse::getPosition(window))) {
+						cout << "super";
+						balls.erase(balls.begin() + i);
+						if (balls.size() <= 0) {
+							exit(0);
+						}
+
+					}
 					
 				}
 			}
@@ -103,7 +118,7 @@ int main()
 			case sf::Event::KeyPressed:
 				if (event.key.code == sf::Keyboard::A) {
 					for (int i = 0; i < balls.size(); i++) {
-						balls.at(i).setRandomSpeed(0.2,2);
+						balls.at(i).setRandomSpeed(1,10);
 
 					}
 				}
@@ -116,7 +131,7 @@ int main()
 		
 		fps = 1000000 / elapsedTime;
 
-		showFPS.setString(std::to_string(fps));
+		showFPS.setString("FPS: " + std::to_string(fps));
 		//std::cout << fps << endl;
 		/*ball.update(window);
 		b->update(window);
@@ -131,7 +146,7 @@ int main()
 
 		}
 
-		window.draw(test);
+		//window.draw(test);
 		//window.draw(line,2,sf::Lines);
 
 		window.draw(showFPS);

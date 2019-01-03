@@ -27,6 +27,10 @@ bool isPointInside(sf::CircleShape circle, sf::Vector2i p) {
 	return isPointInside(circle, Point(p.x, p.y));
 }
 
+bool isPointInside(sf::CircleShape circle, int x, int y) {
+	return isPointInside(circle, Point(x, y));
+}
+
 //======================================================================================
 
 sf::Color getRandomColor() {
