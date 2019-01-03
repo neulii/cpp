@@ -11,15 +11,17 @@ int main()
 	const int HEIGHT = 500;
 
 	const int speedMin = 50;
-	const int speedMax = 500;
+	const int speedMax =500;
 
 	
 
 	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Balls");
 	sf::Clock clock;
 	sf::Font gameFont;
+
 	sf::Text showFPS;
 	sf::Text deltaTime;
+	sf::Text ballCounter;
 
 	window.setFramerateLimit(60);
 
@@ -38,8 +40,10 @@ int main()
 	srand(time(NULL));
 
 	vector<Ball> balls;
-	int numberOfBalls =50;
+	int numberOfBalls =100;
+	int randomY = 0;
 	int randomX = 0;
+
 
 	/*for (int i = 0; i < 10; i++) {
 
@@ -48,14 +52,26 @@ int main()
 
 	for (int i = 0; i < numberOfBalls; i++) {
 		
-		int range = window.getSize().y-20;
+		int rangeY = window.getSize().y - 20;
+		int rangeX = window.getSize().x - 20;
+		
+		randomY = getRandomInt(rangeY);
+		randomX = getRandomInt(rangeX);
 
-		randomX = getRandomInt(range);
-		//cout << randomX << endl;
 
-		Ball *temp = new Ball(20, randomX, 20);
+		//cout << randomY << endl;
+
+		Ball *temp = new Ball(randomX, randomY, 20);
 		temp->setRandomColor();
 		temp->setRandomSpeed(speedMin,speedMax);
+
+		if (getRandomInt(0, 1)) {
+			temp->setRight();
+		}
+		else
+		{
+			temp->setLeft();
+		}
 
 		balls.push_back(*temp);
 	}
@@ -70,6 +86,12 @@ int main()
 	deltaTime.setString("0");
 	deltaTime.setCharacterSize(20);
 	deltaTime.setPosition(0, 20);
+
+	ballCounter.setFont(gameFont);
+	ballCounter.setString("0");
+	ballCounter.setCharacterSize(20);
+	ballCounter.setPosition(0, 40);
+
 
 
 
@@ -142,6 +164,7 @@ int main()
 
 		showFPS.setString("FPS: " + std::to_string(fps));
 		deltaTime.setString("dt: " + std::to_string(elapsedTime));
+		ballCounter.setString("balls: " + std::to_string(balls.size()));
 
 		//std::cout << fps << endl;
 		/*ball.update(window);
@@ -163,6 +186,8 @@ int main()
 
 		window.draw(showFPS);
 		window.draw(deltaTime);
+		window.draw(ballCounter);
+
 
 		window.display();
 		window.clear();

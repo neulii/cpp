@@ -33,6 +33,9 @@ public:
 	void render(sf::RenderWindow &window);
 	void update(sf::RenderWindow &window, long dt);
 	void setRandomColor();
+
+	void setLeft();
+	void setRight();
 };
 
 #endif // !BALL_H

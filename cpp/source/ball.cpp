@@ -77,3 +77,13 @@ bool Ball::isInside(sf::Vector2i p) {
 	return isPointInside(circle, p);
 }
 
+void Ball::setLeft() {
+	left = true;
+	right = false;
+}
+
+void Ball::setRight() {
+	left = false;
+	right = true;
+}
+
