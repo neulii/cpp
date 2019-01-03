@@ -10,10 +10,11 @@ int main()
 	const int WIDTH = 500;
 	const int HEIGHT = 500;
 
+	//test
+
 	const int speedMin = 50;
 	const int speedMax =500;
 
-	
 
 	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Balls");
 	sf::Clock clock;
@@ -22,6 +23,25 @@ int main()
 	sf::Text showFPS;
 	sf::Text deltaTime;
 	sf::Text ballCounter;
+
+	sf::Texture buttons;
+	
+	buttons.loadFromFile("buttons.jpg");
+
+	sf::Sprite buttonSprite(buttons);
+	buttonSprite.setScale(0.05, 0.05);
+
+	sf::CircleShape a;
+	a.setPosition(0, 0);
+	a.setRadius(20);
+	a.setTexture(&buttons);
+
+
+
+
+
+
+
 
 	window.setFramerateLimit(60);
 
@@ -183,11 +203,12 @@ int main()
 
 		//window.draw(test);
 		//window.draw(line,2,sf::Lines);
+		//window.draw(buttonSprite);
 
 		window.draw(showFPS);
 		window.draw(deltaTime);
 		window.draw(ballCounter);
-
+		window.draw(a);
 
 		window.display();
 		window.clear();
