@@ -10,12 +10,16 @@ int main()
 	const int WIDTH = 500;
 	const int HEIGHT = 500;
 
+	const int speedMin = 50;
+	const int speedMax = 500;
+
 	
 
 	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Balls");
 	sf::Clock clock;
 	sf::Font gameFont;
 	sf::Text showFPS;
+	sf::Text deltaTime;
 
 	window.setFramerateLimit(60);
 
@@ -51,7 +55,7 @@ int main()
 
 		Ball *temp = new Ball(20, randomX, 20);
 		temp->setRandomColor();
-		temp->setRandomSpeed(1,10);
+		temp->setRandomSpeed(speedMin,speedMax);
 
 		balls.push_back(*temp);
 	}
@@ -62,6 +66,12 @@ int main()
 	showFPS.setString("0");
 	showFPS.setStyle(sf::Text::Regular);
 	
+	deltaTime.setFont(gameFont);
+	deltaTime.setString("0");
+	deltaTime.setCharacterSize(20);
+	deltaTime.setPosition(0, 20);
+
+
 
 	clock.restart();
 	while (window.isOpen()) {
@@ -97,7 +107,6 @@ int main()
 				}*/
 				for (int i = 0; i < balls.size(); i++) {
 					if (balls.at(i).isInside(sf::Mouse::getPosition(window))) {
-						cout << "super";
 						balls.erase(balls.begin() + i);
 						if (balls.size() <= 0) {
 							exit(0);
@@ -118,7 +127,7 @@ int main()
 			case sf::Event::KeyPressed:
 				if (event.key.code == sf::Keyboard::A) {
 					for (int i = 0; i < balls.size(); i++) {
-						balls.at(i).setRandomSpeed(1,10);
+						balls.at(i).setRandomSpeed(speedMin,speedMax);
 
 					}
 				}
@@ -132,6 +141,8 @@ int main()
 		fps = 1000000 / elapsedTime;
 
 		showFPS.setString("FPS: " + std::to_string(fps));
+		deltaTime.setString("dt: " + std::to_string(elapsedTime));
+
 		//std::cout << fps << endl;
 		/*ball.update(window);
 		b->update(window);
@@ -141,8 +152,9 @@ int main()
 
 		for (int i = 0; i < balls.size(); i++) {
 
+			balls.at(i).update(window, elapsedTime);
+			
 			balls.at(i).render(window);
-			balls.at(i).update(window);
 
 		}
 
@@ -150,6 +162,7 @@ int main()
 		//window.draw(line,2,sf::Lines);
 
 		window.draw(showFPS);
+		window.draw(deltaTime);
 
 		window.display();
 		window.clear();

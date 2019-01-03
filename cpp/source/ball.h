@@ -31,7 +31,7 @@ public:
 	bool isInside(sf::Vector2i p);
 
 	void render(sf::RenderWindow &window);
-	void update(sf::RenderWindow &window);
+	void update(sf::RenderWindow &window, long dt);
 	void setRandomColor();
 };
 

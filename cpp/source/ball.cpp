@@ -22,14 +22,15 @@ void Ball::render(sf::RenderWindow &window)
 	window.draw(circle);
 }
 
-void Ball::update(sf::RenderWindow &window)
+void Ball::update(sf::RenderWindow &window, long dt)
 {
 	
 	//std::cout << circle.getPosition().x <<  "   " << right << "   " << left <<  std::endl;
+	//std::cout << dt << std::endl;
 
 	if (right) {
 		if (circle.getPosition().x < (window.getSize().x)-2*circle.getRadius()) {
-			circle.move(speed, 0);
+			circle.move(speed*dt/1000000, 0);
 		}
 		else {
 			setRandomColor();
@@ -41,7 +42,7 @@ void Ball::update(sf::RenderWindow &window)
 	if (left) {
 
 		if (circle.getPosition().x > 0) {
-			circle.move(-1*speed, 0);
+			circle.move(-1*speed*dt/1000000, 0);
 		}
 		else {
 			setRandomColor();
