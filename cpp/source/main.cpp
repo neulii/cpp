@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int main()
+int main_old()
 {
 	const int WIDTH = 500;
 	const int HEIGHT = 500;
