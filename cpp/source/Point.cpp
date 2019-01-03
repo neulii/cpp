@@ -1,7 +1,7 @@
+#include "functions.h"
 #include "Point.h"
 #include <iostream>
 #include <time.h>
-#include "functions.h"
 #include <ostream>
 
 using namespace std;

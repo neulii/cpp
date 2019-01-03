@@ -6,7 +6,26 @@
 using namespace std;
 //=======================================================================================
 
-//bool isPointInside(sf::CircleShape circle, Point p);
+
+
+bool isPointInside(sf::CircleShape circle, Point p) {
+	bool isInside = false;
+
+	double a = p.getX() - (circle.getPosition().x+circle.getRadius());
+	double b = circle.getPosition().y+circle.getRadius() - p.getY();
+
+	double c = sqrt((a * a) + (b * b));
+
+	if (c <= circle.getRadius()) {
+		isInside = true;
+	}
+
+	return isInside;
+}
+
+bool isPointInside(sf::CircleShape circle, sf::Vector2i p) {
+	return isPointInside(circle, Point(p.x, p.y));
+}
 
 //======================================================================================
 
