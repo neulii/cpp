@@ -1,11 +1,24 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <cmath>
 
 //#define DEBUG
 
 
 int main()
 {
+	
+	float angle = 90;
+	const int FPS = 60;
+	float PI = 3.14;
+
+	float ballSpeed = 10;
+	
+	float speedX = ballSpeed;
+	float speedY = 0;
+
+	const int paddleSpeed = 10;
+	
 
 	const int ballSize = 20;
 	const sf::Vector2f paddleSize(30,150 );
@@ -18,6 +31,7 @@ int main()
 	bool ballToLeft = false;
 
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Pong");
+	window.setFramerateLimit(FPS);
 
 	sf::CircleShape ball;
 
@@ -53,16 +67,18 @@ int main()
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 			if(playerPaddle.getPosition().y>0)
-				playerPaddle.move(0, -1);
+				playerPaddle.move(0, paddleSpeed*-1);
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
 			if (playerPaddle.getPosition().y + playerPaddle.getSize().y < window.getSize().y)
-				playerPaddle.move(0, 1);
+				playerPaddle.move(0, paddleSpeed);
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 			if (!gameIsRunning) {
+				speedX = ballSpeed;
+				speedY = 0;
 				gameIsRunning = true;
 				ballToRight = true;
 				ballToLeft = false;
@@ -80,6 +96,12 @@ int main()
 
 				//std::cout << "isrunning  " << gameIsRunning << " balltoright:  " << ballToRight << std::endl;
 			
+				//Wenn ball oben oder unten 
+				if (ball.getPosition().y <= 0 || ball.getPosition().y>window.getSize().y-ball.getRadius()*2) {
+					speedY = -speedY;
+				}
+
+
 				//Ball richtung Rechts
 				if (ballToRight) {
 				
@@ -91,7 +113,7 @@ int main()
 					#endif // DEBUG
 					
 					//ball bewegen
-					ball.move(0.5, 0);
+					ball.move(speedX, speedY);
 
 					//bedingungen für maschine paddle
 					bool ballIsRight = (ball.getPosition().x > window.getSize().x - paddleSize.x - ball.getRadius() * 2);
@@ -100,10 +122,21 @@ int main()
 					
 					//wenn ball paddle erwischt
 					if(ballIsRight && ballIsOverLimit && ballIsUnderLimit){
-						std::cout << "oh schreck" << std::endl;
 
 						ballToRight = false;
 						ballToLeft = true;
+					
+						float gk = machinePaddle.getPosition().y+paddleSize.y/2-ball.getPosition().y-ball.getRadius();
+						float ak = paddleSize.x + ball.getRadius();
+
+						std::cout << "ak: " << ak << "       gk: " << gk << std::endl;
+
+						angle = std::atan(gk / ak)*180/PI;
+
+						speedY = -1*std::sin(angle *PI/180)*ballSpeed;
+						speedX = std::cos(angle *PI/180)*ballSpeed;
+					
+						std::cout << "angle: " << angle << "speedY : " << speedY << std::endl;
 					}
 
 					//Ball nicht gefangen
@@ -115,7 +148,34 @@ int main()
 				
 				//Ball Richtung links
 				if (ballToLeft) {
-					ball.move(-0.5, 0);
+
+					//ball bewegen
+					ball.move(-1*speedX, speedY);
+
+					//bedingungen für menschen paddle
+					bool ballIsLeft = (ball.getPosition().x < paddleSize.x);
+					bool ballIsUnderLimit = (ball.getPosition().y > playerPaddle.getPosition().y - ball.getRadius() * 2);
+					bool ballIsOverLimit = (ball.getPosition().y < playerPaddle.getPosition().y + paddleSize.y);
+
+					//wenn ball paddle erwischt
+					if (ballIsLeft && ballIsOverLimit && ballIsUnderLimit) {
+						std::cout << "oh schreck" << std::endl;
+
+						ballToRight = true;
+						ballToLeft = false;
+
+						float gk = playerPaddle.getPosition().y + paddleSize.y / 2 - ball.getPosition().y - ball.getRadius();
+						float ak = paddleSize.x + ball.getRadius();
+
+						std::cout << "ak: " << ak << "       gk: " << gk << std::endl;
+
+						angle = std::atan(gk / ak) * 180 / PI;
+
+						speedY = -1 * std::sin(angle *PI / 180)*ballSpeed;
+						speedX = std::cos(angle *PI / 180)*ballSpeed;
+
+						std::cout << "angle: " << angle << "speedY : " << speedY << std::endl;
+					}
 
 					//ball nicht gefangen
 					if (ball.getPosition().x < 0) {
