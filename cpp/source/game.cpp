@@ -1,106 +1,61 @@
 #include <SFML/Graphics.hpp>
-#include "ball.h"
 #include <iostream>
-#include "functions.h"
 
-using namespace std;
+
 
 int main()
 {
-	const int WIDTH = 800;
-	const int HEIGHT = 500;
 
-	const int paddleSpeed = 3;
+	const int ballSize = 20;
+	const sf::Vector2f paddleSize(20, 60);
+	const sf::Color ballColor = sf::Color::Red;
+	const sf::Color paddleColor = sf::Color::Blue;
 
-	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Balls");
-	sf::Clock clock;
-	sf::Font gameFont;
 
-	sf::Text showFPS;
-	sf::Text deltaTime;
+	sf::RenderWindow window(sf::VideoMode(800, 600), "Pong");
 
-	sf::Vector2f paddleSize(30, 100);
+	sf::CircleShape ball;
 
 	sf::RectangleShape playerPaddle;
 	sf::RectangleShape machinePaddle;
 
-	playerPaddle.setFillColor(sf::Color::Blue);
-	playerPaddle.setPosition(0, (HEIGHT / 2 - paddleSize.y / 2));
-
-	machinePaddle.setFillColor(sf::Color::Blue);
-	machinePaddle.setPosition(window.getSize().x - paddleSize.x, (HEIGHT / 2 - paddleSize.y / 2));
-
-	playerPaddle.setSize(paddleSize);
-	machinePaddle.setSize(paddleSize);
+	ball.setRadius(ballSize);
+	ball.setPosition(window.getSize().x / 2 - ball.getRadius(), window.getSize().y / 2 - ball.getRadius());
+	ball.setFillColor(ballColor);
 
 
-	
 
-	window.setFramerateLimit(60);
 
-	int fps = 0;
-	long elapsedTime = 0;
 
-	srand(time(NULL));
 
-	gameFont.loadFromFile("arial.ttf");
-	showFPS.setFont(gameFont);
-	showFPS.setCharacterSize(20);
-	showFPS.setString("0");
-	showFPS.setStyle(sf::Text::Regular);
 
-	deltaTime.setFont(gameFont);
-	deltaTime.setString("0");
-	deltaTime.setCharacterSize(20);
-	deltaTime.setPosition(0, 20);
-
-	clock.restart();
 	while (window.isOpen()) {
+
 		sf::Event event;
-		while (window.pollEvent(event)) {			
+
+		while (window.pollEvent(event)) {
+
 			switch (event.type)
 			{
 			case sf::Event::Closed:
 				window.close();
-				break;
 
-
-			case sf::Event::KeyPressed:
-				if (event.key.code == sf::Keyboard::Up) {
-					
-				}
 				break;
 			}
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-			if(playerPaddle.getPosition().y>0)
-				playerPaddle.move(0, -paddleSpeed);
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-			if(playerPaddle.getPosition().y+paddleSize.y<HEIGHT)
-				
-				playerPaddle.move(0, paddleSpeed);
-		}
-
-		elapsedTime = clock.getElapsedTime().asMicroseconds();
-		clock.restart();
-
-		fps = 1000000 / elapsedTime;
-
-		showFPS.setString("FPS: " + std::to_string(fps));
-		deltaTime.setString("dt: " + std::to_string(elapsedTime));
-
-		window.draw(playerPaddle);
-		window.draw(machinePaddle);
 
 
+		window.draw(ball);
 
-		window.draw(showFPS);
-		window.draw(deltaTime);
+	
+
 
 		window.display();
 		window.clear();
 	}
+
+
+
 	return 0;
 }

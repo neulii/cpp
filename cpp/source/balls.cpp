@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int main_old()
+int balls()
 {
 	const int WIDTH = 500;
 	const int HEIGHT = 500;
