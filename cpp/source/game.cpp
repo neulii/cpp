@@ -4,7 +4,6 @@
 
 //#define DEBUG
 
-
 int main()
 {
 	
@@ -18,8 +17,9 @@ int main()
 	float speedY = 0;
 
 	const int paddleSpeed = 10;
-	
 
+	const int machineSpeed = 5;
+	
 	const int ballSize = 20;
 	const sf::Vector2f paddleSize(30,150 );
 	const sf::Color ballColor = sf::Color::Red;
@@ -77,6 +77,7 @@ int main()
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 			if (!gameIsRunning) {
+				
 				speedX = ballSpeed;
 				speedY = 0;
 				gameIsRunning = true;
@@ -86,12 +87,11 @@ int main()
 		}
 
 		if (!gameIsRunning) {
-
+			
 			ball.setPosition(paddleSize.x, playerPaddle.getPosition().y + paddleSize.y / 2 - ball.getRadius());
 		}
 		else {
 
-			
 			if (gameIsRunning) {
 
 				//std::cout << "isrunning  " << gameIsRunning << " balltoright:  " << ballToRight << std::endl;
@@ -101,6 +101,26 @@ int main()
 					speedY = -speedY;
 				}
 
+				//Computer paddle bewegen
+
+				/*if (machinePaddle.getPosition().y > ball.getPosition().y + ball.getRadius()) {
+					machinePaddle.move(0, -1*machineSpeed);
+				
+				}*/
+				if (machinePaddle.getPosition().y+paddleSize.y/2 > ball.getPosition().y + ball.getRadius()) {
+					if(machinePaddle.getPosition().y>0)
+						machinePaddle.move(0, -1 * machineSpeed);
+
+				}
+
+				/*if (machinePaddle.getPosition().y + paddleSize.y < ball.getPosition().y + 2 * ball.getRadius()) {
+					machinePaddle.move(0, machineSpeed);
+				}*/
+
+				if (machinePaddle.getPosition().y + paddleSize.y/2 < ball.getPosition().y + 2 * ball.getRadius()) {
+					if (machinePaddle.getPosition().y + paddleSize.y < window.getSize().y)
+					machinePaddle.move(0, machineSpeed);
+				}
 
 				//Ball richtung Rechts
 				if (ballToRight) {
@@ -142,8 +162,9 @@ int main()
 					//Ball nicht gefangen
 					if (ball.getPosition().x > window.getSize().x - ball.getRadius() * 2) {
 						gameIsRunning = false;
+						playerPaddle.setPosition(0, window.getSize().y / 2 - paddleSize.y / 2);
+						machinePaddle.setPosition(window.getSize().x - paddleSize.x, window.getSize().y / 2 - paddleSize.y / 2);
 					}
-					
 				}
 				
 				//Ball Richtung links
@@ -180,6 +201,8 @@ int main()
 					//ball nicht gefangen
 					if (ball.getPosition().x < 0) {
 						gameIsRunning = false;
+						playerPaddle.setPosition(0, window.getSize().y / 2 - paddleSize.y / 2);
+						machinePaddle.setPosition(window.getSize().x - paddleSize.x, window.getSize().y / 2 - paddleSize.y / 2);
 					}
 
 					//
@@ -194,8 +217,5 @@ int main()
 		window.display();
 		window.clear();
 	}
-
-
-
 	return 0;
 }
