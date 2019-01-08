@@ -21,9 +21,6 @@
     <ClCompile Include="source\Point.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="source\map.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="source\ball.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -31,6 +28,12 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="source\balls.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="source\pong.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="source\classes.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

@@ -4,7 +4,7 @@
 
 //#define DEBUG
 
-int main()
+int pong_main()
 {
 	
 	float angle = 90;

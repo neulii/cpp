@@ -20,10 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\ball.cpp" />
+    <ClCompile Include="source\classes.cpp" />
     <ClCompile Include="source\functions.cpp" />
     <ClCompile Include="source\game.cpp" />
     <ClCompile Include="source\balls.cpp" />
-    <ClCompile Include="source\map.cpp" />
+    <ClCompile Include="source\pong.cpp" />
     <ClCompile Include="source\Point.cpp" />
   </ItemGroup>
   <ItemGroup>
