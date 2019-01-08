@@ -24,16 +24,16 @@
     <ClCompile Include="source\ball.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="source\game.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="source\balls.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="source\pong.cpp">
+    <ClCompile Include="source\classes.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes.cpp">
+    <ClCompile Include="source\map.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="source\pong.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
