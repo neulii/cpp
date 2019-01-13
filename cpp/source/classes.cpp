@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 
+int pong_main();
+
 class ViewAble {
 public:
 	virtual void showObjectToConsole() = 0;
@@ -64,31 +66,10 @@ public:
 
 int main() {
 	
-	
-	Rectangle *rr = new Rectangle(10, 10);
+	pong_main();
 
-
-	DrawingObject *r = new DrawingObject(10, 2);
-
-	
-
-	std::vector<ViewAble *> objects;
-
-	objects.push_back(r);
-	objects.push_back(rr);
-
-
-	for (int i = 0; i < objects.size(); i++) {
-
-		objects.at(i)->showObjectToConsole();
-
-	}
 
 
 	
-	
-
-
-	system("PAUSE");
 	return 0;
 }
